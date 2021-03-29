@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Concerns\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Material extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable;
 
     protected $fillable = [
         'name',
@@ -23,7 +24,7 @@ class Material extends Model
     }
 
     public function category() {
-        return $this->hasOne(Category::class, "id", 'type_id');
+        return $this->hasOne(Category::class, "id", 'category_id');
     }
 
     public function requests() {

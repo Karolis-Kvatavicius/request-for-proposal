@@ -25,7 +25,7 @@
                             <x-label for="type_id" :value="__('Type')" />
                             <select name="type_id" id="type_id">
                                 @foreach ($types as $type)
-                                    <option value="{{ $type->id }} {{ (old("type_id") == $type->id ? "selected":"") }}">{{ $type->name }}</option>
+                                    <option value="{{ $type->id }}" {{ (old("type_id") == $type->id ? "selected":"") }}>{{ $type->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -34,7 +34,7 @@
 
                             <select name="category_id" id="category_id">
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }} {{ (old("category_id") == $category->id ? "selected":"") }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" {{ (old("category_id") == $category->id ? "selected":"") }}>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>

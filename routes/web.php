@@ -26,6 +26,8 @@ Route::post('/store/{material}', [RequestController::class, 'store'])->middlewar
 Route::get('/admin-dashboard', [MaterialController::class, 'index'])->middleware(['admin'])->name('admin.dashboard');
 Route::post('/admin-dashboard', [MaterialController::class, 'store'])->middleware(['admin']);
 
+Route::post('/dashboard/filter', [MaterialController::class, 'filter'])->middleware(['auth'])->name('materials.filter');
+
 Route::get('/admin-dashboard/requests', [RequestController::class, 'index'])->middleware(['admin'])->name('admin.requests');
 Route::post('/admin-dashboard/requests/{req}', [RequestController::class, 'update'])->middleware(['admin'])->name('admin.request.update');
 
