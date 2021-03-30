@@ -23,6 +23,14 @@
                         <input class="p-2" type="submit" name="grant" value="Grant Access">
                         <input class="p-2" type="submit" name="deny" value="Deny Access">
                     </form>
+                    {{-- {{dd($req->status)}} --}}
+                    @if ($req->material->type->name === "hardcopy" && $req->status == 1)
+                    <form class="pt-2" action="{{ route('hardcopy.taken', $req) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <input class="p-2" type="submit" name="mark_taken" value="Mark as taken">
+                    </form>
+                    @endif
                 </div>
             @endforeach
         </div>

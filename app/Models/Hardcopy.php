@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Hardcopy extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'material_id',
+        'taken',
+        'return',
+        'deadline',
+    ];
 }

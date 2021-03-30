@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HardcopyController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\UserController;
@@ -29,9 +30,8 @@ Route::get('/admin-dashboard', [MaterialController::class, 'index'])->middleware
 Route::post('/admin-dashboard', [MaterialController::class, 'filter'])->middleware(['admin']);
 Route::put('/admin-dashboard', [MaterialController::class, 'store'])->middleware(['admin']);
 
-
-
 Route::get('/admin-dashboard/requests', [RequestController::class, 'index'])->middleware(['admin'])->name('admin.requests');
 Route::post('/admin-dashboard/requests/{req}', [RequestController::class, 'update'])->middleware(['admin'])->name('admin.request.update');
+Route::put('/admin-dashboard/hardcopy/{req}', [HardcopyController::class, 'store'])->middleware(['admin'])->name('hardcopy.taken');
 
 require __DIR__ . '/auth.php';

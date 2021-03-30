@@ -17,7 +17,7 @@ class CreateHardcopiesTable extends Migration
         Schema::create('hardcopies', function (Blueprint $table) {
             $table->foreignIdFor(Request::class, 'material_id')->primary();
             $table->timestamp('taken');
-            $table->timestamp('return');
+            $table->timestamp('return')->nullable();
             $table->timestamp('deadline');
             $table->timestamps();
         });
