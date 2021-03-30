@@ -21,6 +21,6 @@ class Admin
         if(Auth::check() && Auth::user()->roles()->where('name', 'admin')->exists()) {
             return $next($request);
         }
-         return Redirect::route('welcome');
+         return Redirect::route('dashboard');
     }
 }

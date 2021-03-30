@@ -21,12 +21,15 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/dashboard', [MaterialController::class, 'userIndex'])->middleware(['auth'])->name('dashboard');
+Route::post('/dashboard', [MaterialController::class, 'filter'])->middleware(['auth']);
+
 Route::post('/store/{material}', [RequestController::class, 'store'])->middleware(['auth'])->name('store.request');
 
 Route::get('/admin-dashboard', [MaterialController::class, 'index'])->middleware(['admin'])->name('admin.dashboard');
-Route::post('/admin-dashboard', [MaterialController::class, 'store'])->middleware(['admin']);
+Route::post('/admin-dashboard', [MaterialController::class, 'filter'])->middleware(['admin']);
+Route::put('/admin-dashboard', [MaterialController::class, 'store'])->middleware(['admin']);
 
-Route::post('/dashboard/filter', [MaterialController::class, 'filter'])->middleware(['auth'])->name('materials.filter');
+
 
 Route::get('/admin-dashboard/requests', [RequestController::class, 'index'])->middleware(['admin'])->name('admin.requests');
 Route::post('/admin-dashboard/requests/{req}', [RequestController::class, 'update'])->middleware(['admin'])->name('admin.request.update');

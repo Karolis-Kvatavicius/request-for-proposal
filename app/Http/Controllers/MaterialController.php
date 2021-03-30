@@ -52,8 +52,8 @@ class MaterialController extends Controller
 
     public function filter(Request $request)
     {
-        // dd($request);
-        $filtered_materials = Material::query();
+        // dd($request->url());
+        $filtered_materials = Material::withCount('requests');
 
         if ($request->type) {
             $filtered_materials->where('type_id', $request->type);
@@ -63,14 +63,28 @@ class MaterialController extends Controller
             $filtered_materials->where('category_id', $request->category);
         }
 
-        if ($request->addition_date) {
-            $filtered_materials->where('created_at', $request->addition_date);
+        if ($request->date_to) {
+            $filtered_materials->where('created_at', '<=', $request->date_to);
+        }
+
+        if ($request->date_from) {
+            $filtered_materials->where('created_at', '>=', $request->date_from);
+        }
+
+        if ($request->most_popular) {
+            $filtered_materials->orderBy('requests_count', 'desc');
         }
 
         $types = Type::all();
         $categories = Category::all();
 
-        return view('dashboard', [
+        $view = 'dashboard';
+        
+        if ($request->route()->uri === 'admin-dashboard') {
+            $view = 'admin.dashboard';
+        }
+
+        return view($view, [
             'materials' => $filtered_materials->get(),
             'types' => $types,
             'categories' => $categories

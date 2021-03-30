@@ -14,6 +14,7 @@
                 <div class="p-6 bg-white border-b border-gray-200 mt-4">
                     <form action="{{ route('admin.dashboard') }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <h3>Register Material</h3>
                         <div class="mt-4">
                             <x-label for="name" :value="__('Name')" />
@@ -57,7 +58,7 @@
                         </div>
                     </form>
                 </div>
-
+                <x-filter :categories="$categories" :types="$types" />
                 @foreach ($materials ?? [] as $material)
                     <div class="mt-4">
                         <b>Name: </b>{{ $material->name }}<br>

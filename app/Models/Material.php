@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Material extends Model
 {
-    use HasFactory, Filterable;
+    use HasFactory;
 
     protected $fillable = [
         'name',
@@ -36,6 +36,6 @@ class Material extends Model
     }
 
     public function approved() {
-        return $request = $this->requests()->where('user_id', Auth::id())->where('status', true)->count() > 0;
+        return $this->requests()->where('user_id', Auth::id())->where('status', true)->count() > 0;
     }
 }

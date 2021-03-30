@@ -16,7 +16,7 @@ class RequestController extends Controller
             'status' => false
         ]);
 
-        return back();
+        return redirect()->route('dashboard');
     }
 
     public function update(ModelsRequest $req, Request $request) {
