@@ -10,6 +10,7 @@ class HardcopyController extends Controller
 {
     public function store(ModelsRequest $req) {
         Hardcopy::create([
+            'user_id' => $req->user_id,
             'material_id' => $req->material_id,
             'taken' => now(),
             'return' => null,
@@ -19,5 +20,13 @@ class HardcopyController extends Controller
         // $req->delete();
 
         return back();
+    }
+
+    public function index() {
+        return view('admin.hardcopies', ['hardcopies' => Hardcopy::all()]);
+    }
+
+    public function return(Hardcopy $hardcopy) {
+        
     }
 }

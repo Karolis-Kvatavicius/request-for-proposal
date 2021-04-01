@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HardcopyController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\RandUserApiController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [RandUserApiController::class, 'index'])->name('welcome');
 
 Route::get('/dashboard', [MaterialController::class, 'userIndex'])->middleware(['auth'])->name('dashboard');
 Route::post('/dashboard', [MaterialController::class, 'filter'])->middleware(['auth']);
@@ -33,5 +32,8 @@ Route::put('/admin-dashboard', [MaterialController::class, 'store'])->middleware
 Route::get('/admin-dashboard/requests', [RequestController::class, 'index'])->middleware(['admin'])->name('admin.requests');
 Route::post('/admin-dashboard/requests/{req}', [RequestController::class, 'update'])->middleware(['admin'])->name('admin.request.update');
 Route::put('/admin-dashboard/hardcopy/{req}', [HardcopyController::class, 'store'])->middleware(['admin'])->name('hardcopy.taken');
+
+Route::get('admin-dashboard/hardcopies', [HardcopyController::class, 'index'])->middleware(['admin'])->name('hardcopies.taken');
+Route::post('admin-dashboard/hardcopies/{hardcopy}', [HardcopyController::class, 'return'])->middleware(['admin'])->name('hardcopy.return');
 
 require __DIR__ . '/auth.php';

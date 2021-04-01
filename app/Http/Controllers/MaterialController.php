@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Filters\MaterialFilter;
 use App\Models\Category;
 use App\Models\Material;
 use App\Models\Type;
